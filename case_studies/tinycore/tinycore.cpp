@@ -6,11 +6,6 @@
 #include <stdint.h>
 #include <string.h>
 
-// One discrete parameter:
-// if BRANCH_PREDICT_JUMP is defined: branch predictor will always predict 'jump'
-// #define BRANCH_PREDICT_JUMP
-
-
 // Fixed parameters
 #define ADDR_WIDTH 16
 #define CACHE_SIZE_PRICE_COEF 6
