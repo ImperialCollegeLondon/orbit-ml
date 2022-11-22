@@ -257,7 +257,12 @@ void parse(std::string filename, Code *c)
 //     n_ways: 1--16
 
 
-[[orbit::core(branch_predict_jump, cache_read_scheme, setid_width, line_width, n_ways)]]
+[[orbit::core(branch_predict_jump<bool>, 
+              cache_read_scheme <int; 0; 1>, 
+              setid_width <int; 1; 4>, 
+              line_width <int; 1; 4>, 
+              n_ways <int; 1; 16>)]]
+
 void execute(Memory *m, Code *c, int *n_cycles)
 {
     int pc = 0;

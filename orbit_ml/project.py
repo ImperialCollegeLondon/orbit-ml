@@ -35,6 +35,25 @@ class Project:
 
         return cmd_obj
 
+    def _process_params(params):
+        ret = []
+
+        for p in params:
+            pos_b = p.find("<")
+            pos_e = p.find(">")
+
+            if pos_b == -1 and pos_e == -1:
+                ret.append((p,))
+            elif pos_b != -1 and pos_e != -1:
+                _type = p[0:pos_b]
+                _args = p[pos_b+1: pos_e].split(";")
+                _args.insert(0, _type)
+                ret.append(tuple(_args))
+            else:
+                raise RuntimeError("[x] badly formed attribute arguments!")
+
+        return ret
+
     def _process_core(ast):
         cnode = None
         tbl = ast.query("fn{FunctionDecl}={1}>b{CompoundStmt}", where=lambda fn: fn.attributes is not None)
@@ -45,7 +64,7 @@ class Project:
                 if len(ret) == 1:
                     if cnode is None:
                         cnode = row.fn
-                        core_params = ret[0]
+                        core_params = Project._process_params(ret[0])
                     else:
                         raise RuntimeError(f"multiple core functions defined ({cnode.name}/{row.fn.name}): only one allowed!")
                 else:
@@ -148,7 +167,7 @@ class Project:
             build_args = {}
 
         if self.core.params is not None:
-            missing_params = set(self.core.params) - set(build_args.keys())
+            missing_params = set([p[0] for p in self.core.params]) - set(build_args.keys())
             if len(missing_params) != 0:
                 raise RuntimeError(f"[x] the following parameters for core '{self.core.name}' are missing: {', '.join(missing_params)}")
 

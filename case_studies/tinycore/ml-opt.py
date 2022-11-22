@@ -2,17 +2,29 @@ from orbit_ml import *
 
 prj = Project("tinycore.cpp")
 
-['branch_predict_jump', 'cache_read_scheme', 'setid_width', 'line_width', 'n_ways']
+def convert_params(params):
+    mlo_params = { }
+    for p in params:
+        _type = p[1]
+        if p[1] == "int":
+            if len(p) != 4:
+                raise RuntimeError(f"[x] expecting orbit param type with bound limits: {p}!")
+            mlo_type = "integer"
+            mlo_min = int(p[2])
+            mlo_max = int(p[3])
+        elif p[1] == "bool":
+            mlo_type = "integer"
+            mlo_min = 0
+            mlo_max = 1
+        else:
+            raise RuntimeError(f"[x] parameter type not supported: '{p}'!")
 
-params = {'branch_predict_jump': {'type': 'integer', 'bounds': (0, 1)}, 
-          'cache_read_scheme': {'type': 'integer', 'bounds': (0, 1)},
-          'setid_width': {'type': 'integer', 'bounds': (1, 4)},  
-          'line_width' : {'type': 'integer', 'bounds': (1, 4)},
-          'n_ways': {'type': 'integer', 'bounds': (1, 16)}}
+        mlo_params[p[0]] = {'type': mlo_type, 'bounds': (mlo_min, mlo_max)}
+    return mlo_params
+    
+mlo_params = convert_params(prj.core.params)
 
-cmlo = ceshmlo.CeshMLO(params, 'hebo', 4)
-
-print(params)
+cmlo = ceshmlo.CeshMLO(mlo_params, 'hebo', 4)
 
 for i in range(3):
     print('Iteration', i)

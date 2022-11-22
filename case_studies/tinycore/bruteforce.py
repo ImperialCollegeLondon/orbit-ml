@@ -8,7 +8,7 @@ prj = Project("tinycore.cpp")
 #      line_width: 1--4
 #      n_ways: 1--16
 
-BPJ_LIMIT=1 # 0--1 (MAX)
+BPJ_LIMIT=0 # 0--1 (MAX)
 CR_LIMIT=1 # 0--1  (MAX)
 SW_LIMIT=1 # 1--4  (MAX)
 LW_LIMIT=1 # 1--4  (MAX)
