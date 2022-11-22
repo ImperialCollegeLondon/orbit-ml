@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# comet + riscv-gnu
+export PATH=/opt/comet/bin:/opt/riscv-toolchain/bin:$PATH
+
+# panda
+export PATH=/opt/panda/bin:$PATH
+
+# verilator
+export PATH=/opt/verilator/bin:$PATH
+
+# vivado HLS
+source /opt/Xilinx/Vivado/2022.2/settings64.sh
+
+# orbit
+export PATH=/opt/orbit_ml/bin:$PATH
+export ORBIT_ROOT=/opt/orbit_ml
+export META_CL_CXXFLAGS="-I$ORBIT_ROOT/src/include -I$ORBIT_ROOT/src/include/ac_types  $META_CL_CXXFLAGS"
+export PYTHONPATH="$ORBIT_ROOT:$PYTHONPATH"
+export VERILATOR_ROOT=/opt/verilator
+export META_CL_CXXSTD="c++14"
+
+

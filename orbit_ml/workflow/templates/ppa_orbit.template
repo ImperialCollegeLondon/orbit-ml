@@ -1,0 +1,6 @@
+    {
+       std::ofstream __orbit_ppa;
+       __orbit_ppa.open("ppa.orbit", std::fstream::app);
+       __orbit_ppa << "{{key}}" << ":" << {{value}} << std::endl;
+       __orbit_ppa.close();
+    }

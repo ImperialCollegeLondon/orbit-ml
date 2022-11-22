@@ -1,0 +1,6 @@
+app: {{ sources }}
+	clang++ -o app {{ sources }} {{ defs }} {{ args }}    
+
+clean:
+	rm -rf app
+

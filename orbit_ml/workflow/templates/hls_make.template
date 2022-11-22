@@ -1,0 +1,7 @@
+doCore/solution/impl/verilog/{{ fn_name }}.v: {{ srcs }}
+	rm -rf doCore
+	vitis_hls script.tcl
+
+clean:
+	rm -rf *_hls.log 
+	

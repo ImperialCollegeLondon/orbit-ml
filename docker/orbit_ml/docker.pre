@@ -1,0 +1,12 @@
+#!/bin/bash
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+rm -rf $SCRIPT_DIR/export
+mkdir -p $SCRIPT_DIR/export
+cp -R $SCRIPT_DIR/../../src ./export
+cp -R $SCRIPT_DIR/../../bin ./export
+cp -R $SCRIPT_DIR/../../orbit ./export
+cp -R $SCRIPT_DIR/../../orbit_ml ./export
+#cp -R $SCRIPT_DIR/../../tests ./export
+
